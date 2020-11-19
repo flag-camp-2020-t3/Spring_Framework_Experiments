@@ -1,4 +1,5 @@
 sampleMainProject/log/Logger.class
 sampleMainProject/log/PaymentAction.class
+sampleProject/controller/HomePageController.class
 sampleMainProject/Application.class
 sampleMainProject/log/ServerLogger.class
