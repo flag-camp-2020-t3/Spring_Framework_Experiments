@@ -1,5 +1,6 @@
 Manifest-Version: 1.0
-Built-By: afrikoko
-Build-Jdk: 1.8.0_171
+Implementation-Title: sampleProject Maven Webapp
+Implementation-Version: 1.0
+Build-Jdk-Spec: 1.8
 Created-By: Maven Integration for Eclipse
 

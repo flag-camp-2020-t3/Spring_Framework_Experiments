@@ -1,4 +1,10 @@
+sampleProject/model/User.class
 sampleMainProject/log/Logger.class
+sampleProject/service/UserService.class
+sampleProject/ApplicationConfig.class
+sampleProject/controller/HomePageRestController.class
 sampleMainProject/log/PaymentAction.class
+sampleProject/controller/HomePageController.class
 sampleMainProject/Application.class
 sampleMainProject/log/ServerLogger.class
+sampleProject/model/UserInfo.class
