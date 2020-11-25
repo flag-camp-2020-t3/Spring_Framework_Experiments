@@ -1,0 +1,5 @@
+bin/
+target/
+.idea
+**/.DS_Store
+src/main/java/com/spare4fun/core/Secret.java
