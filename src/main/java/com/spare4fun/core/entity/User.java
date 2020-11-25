@@ -1,89 +1,70 @@
 package com.spare4fun.core.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
+import lombok.Value;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Collection;
 
-/** Represents an user.
- * @author Xinrong Zhao
- * @author www.spare4fun.com
- * @version 1.0
- * @since 1.0
- */
+import static java.util.Objects.requireNonNull;
 
-@Entity
-@Table(name="user")
-public class User implements Serializable {
-    private static final long serialVersionUID = 23526467L;
+@Value
+@Builder
+public class User implements UserDetails {
+    private static final long serialVersionUID = 2396654715019746670L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Getter
-    @Setter
-    private int id;
+    String id;
+    String username;
+    String password;
 
-    @Getter
-    @Setter
-    private String email;
+    @JsonCreator
+    User(@JsonProperty("id") final String id,
+         @JsonProperty("username") final String username,
+         @JsonProperty("password") final String password) {
+        super();
+        this.id = requireNonNull(id);
+        this.username = requireNonNull(username);
+        this.password = requireNonNull(password);
+    }
 
-    @Getter
-    @Setter
-    private String password;
+    @JsonIgnore
+    @Override
+    public Collection<GrantedAuthority> getAuthorities() {
+        return new ArrayList<>();
+    }
 
-    @Getter
-    @Setter
-    private boolean enabled;
+    @JsonIgnore
+    @Override
+    public String getPassword() {
+        return password;
+    }
 
-    @Getter
-    @Setter
-    @OneToOne(mappedBy = "user")
-    private UserInfo userInfo;
+    @JsonIgnore
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
 
-    @Getter
-    @Setter
-    @OneToOne(mappedBy = "user")
-    private Authorities authoroties;
+    @JsonIgnore
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
 
-    @Getter
-    @Setter
-    @OneToMany(mappedBy = "seller")
-    private List<Item> items;
+    @JsonIgnore
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
 
-    @Getter
-    @Setter
-    @OneToOne(mappedBy = "user")
-    private SavedItemsCart savedItemsCart;
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
-    @Getter
-    @Setter
-    @OneToMany(mappedBy = "seller")
-    private List<Offer> sellerOffer;
-
-    @Getter
-    @Setter
-    @OneToMany(mappedBy = "buyer")
-    private List<Offer> buyerOffer;
-
-    @Getter
-    @Setter
-    @OneToMany(mappedBy = "seller")
-    private List<Appointment> sellerAppointment;
-
-    @Getter
-    @Setter
-    @OneToMany(mappedBy = "buyer")
-    private List<Appointment> buyerAppointment;
-
-    @Getter
-    @Setter
-    @OneToMany(mappedBy = "seller")
-    private List<PaymentOrder> sellerPaymentOrder;
-
-    @Getter
-    @Setter
-    @OneToMany(mappedBy = "buyer")
-    private List<PaymentOrder> buyerPaymentOrder;
 }

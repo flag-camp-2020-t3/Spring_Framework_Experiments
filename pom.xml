@@ -19,7 +19,11 @@
 		<java.version>1.8</java.version>
 		<hibernate.javax.persistence.version>1.0.2.Final</hibernate.javax.persistence.version>
 		<springframework.version>5.2.9.RELEASE</springframework.version>
+		<springframework.security.version>5.1.7.RELEASE</springframework.security.version>
 		<mysql.version>8.0.22</mysql.version>
+		<modelmapper.version>2.3.5</modelmapper.version>
+		<commons-lang.version>3.8.1</commons-lang.version>
+		<guava.version>29.0-jre</guava.version>
 	</properties>
 
 	<dependencies>
@@ -38,6 +42,31 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+
+		<!-- Spring Boot: Security -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons-lang.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
+		</dependency>
+
+		<!-- DTO & entity conversion -->
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>${modelmapper.version}</version>
 		</dependency>
 
 		<!-- database: hibernate & lambok -->
