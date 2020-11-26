@@ -1,5 +1,6 @@
-package com.spare4fun.core;
+package com.spare4fun.core.database;
 
+import com.spare4fun.core.Secret;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
