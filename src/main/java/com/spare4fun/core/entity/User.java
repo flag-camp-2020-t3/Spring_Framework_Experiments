@@ -1,28 +1,20 @@
 package com.spare4fun.core.entity;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.List;
 
-/** Represents an user.
- * @author Xinrong Zhao
- * @author www.spare4fun.com
- * @version 1.0
- * @since 1.0
- */
-
+@Builder
 @Entity
-@Table(name="user")
-public class User implements Serializable {
-    private static final long serialVersionUID = 23526467L;
+@Table(name = "user")
+public class User {
+    private static final long serialVersionUID = 2396654715019746670L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter
     @Setter
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Getter
@@ -33,57 +25,40 @@ public class User implements Serializable {
     @Setter
     private String password;
 
-    @Getter
-    @Setter
-    private boolean enabled;
+    /*
+    @Override
+    public Collection<GrantedAuthority> getAuthorities() {
+        return new ArrayList<>();
+    }
 
-    @Getter
-    @Setter
-    @OneToOne(mappedBy = "user")
-    private UserInfo userInfo;
+    @Override
+    public String getPassword() {
+        return password;
+    }
 
-    @Getter
-    @Setter
-    @OneToOne(mappedBy = "user")
-    private Authorities authoroties;
+    @Override
+    public String getUsername() {
+        return email;
+    }
 
-    @Getter
-    @Setter
-    @OneToMany(mappedBy = "seller")
-    private List<Item> items;
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
 
-    @Getter
-    @Setter
-    @OneToOne(mappedBy = "user")
-    private SavedItemsCart savedItemsCart;
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
 
-    @Getter
-    @Setter
-    @OneToMany(mappedBy = "seller")
-    private List<Offer> sellerOffer;
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
 
-    @Getter
-    @Setter
-    @OneToMany(mappedBy = "buyer")
-    private List<Offer> buyerOffer;
-
-    @Getter
-    @Setter
-    @OneToMany(mappedBy = "seller")
-    private List<Appointment> sellerAppointment;
-
-    @Getter
-    @Setter
-    @OneToMany(mappedBy = "buyer")
-    private List<Appointment> buyerAppointment;
-
-    @Getter
-    @Setter
-    @OneToMany(mappedBy = "seller")
-    private List<PaymentOrder> sellerPaymentOrder;
-
-    @Getter
-    @Setter
-    @OneToMany(mappedBy = "buyer")
-    private List<PaymentOrder> buyerPaymentOrder;
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+    */
 }
