@@ -1,15 +1,13 @@
 package com.spare4fun.core.test.dao;
 
-import com.spare4fun.core.dao.UserDao;
+import com.spare4fun.core.dao.UserDaoImpl;
 import com.spare4fun.core.entity.Role;
 import com.spare4fun.core.entity.User;
 import com.spare4fun.core.exception.DuplicateUserException;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.test.context.event.annotation.BeforeTestClass;
 import org.springframework.test.context.event.annotation.BeforeTestMethod;
 
 import java.util.HashSet;
@@ -19,12 +17,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
-public class UserDaoTest {
+public class UserDaoImplTest {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private UserDao userDao;
+    private UserDaoImpl userDaoImpl;
 
     @BeforeTestMethod
     public void setup() {
@@ -32,7 +30,7 @@ public class UserDaoTest {
                 .stream()
                 .forEach(user -> {
                     try {
-                        userDao.addUser(user);
+                        userDaoImpl.addUser(user);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -70,7 +68,7 @@ public class UserDaoTest {
                 .ifPresent(
                         user -> {
                             assertThrows(DuplicateUserException.class, () -> {
-                                userDao.addUser(user);
+                                userDaoImpl.addUser(user);
                             });
                         }
                 );
@@ -78,6 +76,6 @@ public class UserDaoTest {
 
     @Test
     public void contextLoad() {
-        assertThat(userDao).isNotNull();
+        assertThat(userDaoImpl).isNotNull();
     }
 }
