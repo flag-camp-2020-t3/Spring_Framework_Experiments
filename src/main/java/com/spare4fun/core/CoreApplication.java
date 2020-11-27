@@ -11,9 +11,4 @@ public class CoreApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CoreApplication.class, args);
 	}
-
-	@Bean
-	public ModelMapper getModelMapper() {
-		return new ModelMapper();
-	}
 }
