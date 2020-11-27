@@ -14,6 +14,11 @@ public class UserDao {
     @Autowired
     private SessionFactory sessionFactory;
 
+    /**
+     *
+     * @param username
+     * @return
+     */
     public Optional<User> selectApplicationUserByUsername(String username) {
         Optional<User> res = Optional.empty();
         Session session = null;

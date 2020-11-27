@@ -7,9 +7,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/")
 public class AllUserAllowedController {
-    @GetMapping("index")
+    @GetMapping("/index")
     @ResponseBody
     public MessageDto index() {
         return MessageDto

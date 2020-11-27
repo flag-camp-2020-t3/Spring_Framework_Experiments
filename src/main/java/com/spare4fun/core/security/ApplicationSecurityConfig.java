@@ -62,7 +62,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                     .logoutRequestMatcher(new AntPathRequestMatcher("/logout", HttpMethod.GET.name()))
                     .clearAuthentication(true)
                     .invalidateHttpSession(true)
-                    .deleteCookies("JSESSIONID")
+                    .deleteCookies("JSESSIONID", "remember-me")
                     .logoutSuccessUrl("/index");
     }
 

@@ -1,6 +1,7 @@
 package com.spare4fun.core.controller;
 
 import com.spare4fun.core.dto.UserDto;
+import com.spare4fun.core.entity.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
