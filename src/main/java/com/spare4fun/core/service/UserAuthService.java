@@ -14,10 +14,11 @@ public class UserAuthService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return userDao
+        UserDetails ud = userDao
                 .selectApplicationUserByUsername(s)
                 .orElseThrow(() ->
                         new UsernameNotFoundException(String.format("Username %s not found", s))
                 );
+        return ud;
     }
 }

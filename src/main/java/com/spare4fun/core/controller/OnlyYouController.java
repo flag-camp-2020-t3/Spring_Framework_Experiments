@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/private/user")
 public class OnlyYouController {
-    @GetMapping("{user_id}")
+    @GetMapping("{username}")
     @ResponseBody
     @PreAuthorize("#username == authentication.principal.username")
     public UserDto privateUserInfo(String username) {

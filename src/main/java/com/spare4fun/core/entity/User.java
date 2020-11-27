@@ -1,20 +1,20 @@
 package com.spare4fun.core.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Set;
 
 @Entity
 @Table(name = "user")
 @Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class User implements UserDetails, Serializable {
     public static final long serialVersionUID = 12345L;
 
@@ -43,13 +43,13 @@ public class User implements UserDetails, Serializable {
     private Role role;
 
     @Transient
-    private final boolean accountNonExpired = false;
+    private final boolean accountNonExpired = true;
 
     @Transient
-    private final boolean accountNonLocked = false;
+    private final boolean accountNonLocked = true;
 
     @Transient
-    private final boolean credentialsNonExpired = false;
+    private final boolean credentialsNonExpired = true;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

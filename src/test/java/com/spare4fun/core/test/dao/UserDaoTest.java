@@ -4,11 +4,13 @@ import com.spare4fun.core.dao.UserDao;
 import com.spare4fun.core.entity.Role;
 import com.spare4fun.core.entity.User;
 import com.spare4fun.core.exception.DuplicateUserException;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.event.annotation.BeforeTestClass;
+import org.springframework.test.context.event.annotation.BeforeTestMethod;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,7 +26,7 @@ public class UserDaoTest {
     @Autowired
     private UserDao userDao;
 
-    @BeforeTestClass
+    @BeforeTestMethod
     public void setup() {
         dummyUsers()
                 .stream()
@@ -59,7 +61,7 @@ public class UserDaoTest {
         return dummyUsers;
     }
 
-    //@Test
+    @Test
     public void testAddUser() {
         // cannot add duplicate user with same username
         dummyUsers()
