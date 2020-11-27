@@ -1,6 +1,7 @@
 package com.spare4fun.core.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,7 +14,10 @@ import java.util.Set;
 
 @Entity
 @Table(name = "user")
-public class User implements UserDetails {
+@Builder
+public class User implements UserDetails, Serializable {
+    public static final long serialVersionUID = 12345L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter

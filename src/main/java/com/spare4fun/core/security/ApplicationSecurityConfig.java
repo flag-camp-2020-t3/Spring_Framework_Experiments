@@ -1,18 +1,26 @@
 package com.spare4fun.core.security;
 
+import com.spare4fun.core.entity.Role;
 import com.spare4fun.core.service.UserAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import static com.spare4fun.core.entity.Role.ADMIN;
+import static com.spare4fun.core.entity.Role.USER;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -25,13 +33,16 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                     .csrf().disable()
                     .authorizeRequests()
-                    .antMatchers("/", "index", "search").permitAll()
-                    .anyRequest().authenticated()
+                    .antMatchers("/index", "/login", "/logout").permitAll()
+                    .antMatchers("/admin/**").hasAnyRole(ADMIN.name())
+                    .antMatchers("/private/**").hasAnyRole(USER.name(), ADMIN.name())
+                    .anyRequest()
+                    .authenticated()
                 .and()
                 .formLogin()
                     .loginPage("/login")
                     .permitAll()
-                    .defaultSuccessUrl("/")
+                    .defaultSuccessUrl("/index")
                     .usernameParameter("username")
                     .passwordParameter("password")
                 .and()
@@ -39,10 +50,11 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                     .logoutUrl("/logout")
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout", HttpMethod.GET.name()))
                     .clearAuthentication(true)
                     .invalidateHttpSession(true)
-                    .deleteCookies("JSESSIONID", "remember-me")
-                    .logoutSuccessUrl("/");
+                    .deleteCookies("JSESSIONID")
+                    .logoutSuccessUrl("/index");
     }
 
     @Override
